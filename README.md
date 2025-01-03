@@ -1,4 +1,5 @@
 # SR-FLIPFLOP-USING-CASE
+**DATE: 15/11/2024**
 
 **AIM:**
 
@@ -44,49 +45,41 @@ The maximum possible groupings of adjacent ones are already shown in the figure.
 
 5.For different input combinations generate the timing diagram.
 
-
 **PROGRAM**
 
-
- Program for flipflops and verify its truth table in quartus using Verilog programming.
- ```
-module sr_ff (s, r, clk, rst, q);
-  input s, r, clk, rst;
-  output reg q;
-
-  always @(posedge clk or posedge rst)
- begin
-    if (rst)
-      q <= 0; // Reset the flip-flop
-    else
- begin
-      case ({s, r}) // S and R control the behavior
-        2'b00: q <= q;    // No change
-        2'b01: q <= 0;    // Reset
-        2'b10: q <= 1;    // Set
-        2'b11: q <= 0;    // Invalid state, typically treated as reset
-      endcase
-    end
-  end
-endmodule
-```
+Program for flipflops and verify its truth table in quartus using Verilog programming.
 
 Developed by:GERIUS G
 
-RegisterNumber:24900086
+Register Number: 24900086
+```
+module SR(s,r,clk,q,qbar);
+input s,r,clk;
+output reg q;
+output reg qbar;
+initial 
+begin
+q=0;
+qbar=1;
+end
+always @(posedge clk)
+begin
+   q=s|(~r&q);
+   qbar=r|(~s&~q);
+end
+endmodule
+```
+
+**RTL DIAGRAM**
+
+![image](https://github.com/user-attachments/assets/71520e64-7720-44b9-9c04-af0f6274f6e9)
+
+**TIMING WAVEFORM**
 
 
-**RTL LOGIC FOR FLIPFLOPS**
+![image](https://github.com/user-attachments/assets/8fe67f50-4297-4bcc-817d-786f94018d4b)
 
 
-![Screenshot 2024-12-26 132259](https://github.com/user-attachments/assets/35230ba9-cbd9-478f-911a-7f859f3c6f46)
-
-
-**TIMING DIGRAMS FOR FLIP FLOPS**
-
-![Screenshot 2024-12-26 131721](https://github.com/user-attachments/assets/5abbb1d5-d2d3-43cc-b006-1d9c0bc14ee0)
-
-
-**RESULTS**
+**RESULT**
 
 The observation of the simulation results and confirm the successful execution of the program.
